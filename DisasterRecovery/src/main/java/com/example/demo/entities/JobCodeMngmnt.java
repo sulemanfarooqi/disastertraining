@@ -17,7 +17,7 @@ public class JobCodeMngmnt {
 	private int id;
 	private String jobCode;
 	private String description;
-	private int hourlyRate;
+	private double hourlyRate;
 	private int maxHours;
 //	
 //	@OneToOne(mappedBy = "timesheet")
@@ -28,7 +28,7 @@ public class JobCodeMngmnt {
 	public JobCodeMngmnt() {}
 	
 	
-	public JobCodeMngmnt(String jobCode, String description, int hourlyRate, int maxHours) {
+	public JobCodeMngmnt(String jobCode, String description, double hourlyRate, int maxHours) {
 		super();
 		this.jobCode = jobCode;
 		this.description = description;
@@ -53,7 +53,7 @@ public class JobCodeMngmnt {
 		this.description = description;
 	}
 
-	public int getHourlyRate() {
+	public double getHourlyRate() {
 		return hourlyRate;
 	}
 
