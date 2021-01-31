@@ -50,9 +50,9 @@ class DisasterRecoveryApplicationTests {
 		ts.setContractorName("Josh");
 		ts.setApprovalStatus("open");
 		ts.setDate("1/23/2021");
-		ts.setLaborHoursWorked(4);
+//		ts.setLaborHoursWorked(4);
 		ts.setSiteCode(111);
-		ts.setHoursUsed(4);
+//		ts.setHoursUsed(4);
 	    tsRepo.save(ts);
 	}
 	

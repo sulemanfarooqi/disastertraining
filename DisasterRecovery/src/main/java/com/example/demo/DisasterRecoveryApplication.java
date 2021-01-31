@@ -9,5 +9,6 @@ public class DisasterRecoveryApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(DisasterRecoveryApplication.class, args);
 	}
+	
 
 }

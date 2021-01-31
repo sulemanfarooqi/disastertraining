@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<h1>Time Sheet Submission</h1>
+
+	<form action="#" th:action="@{/savetimesheet}" th:object="${timesheet}"
+		method="post">
+		<table border="1">
+			<tr>
+				<td>Site code:</td>
+				<td><input type="text" th:field="*{siteCode}" size="20"></td>
+				<td>Contractor Name:</td>
+				<td><input type="text" th:field="*{contractorName}" size="20"></td>
+				<td>Date:</td>
+				<td><input type="text" th:field="*{date}" size="20" /></td>
+			<tr>
+				<td><select id="Jobcode" name="Jobcode"
+					onchange="selJobCCode(this);">
+						<option th:each="jc:${jclist}" th:value="${jc.jobCode}"
+							th:text="${jc.description}"></option>
+				</select></td>
+			</tr>
+			<tr>
+				<td>Labor Hours Worked:</td>
+				<td><input type="text" th:field="*{laborHoursWorked} "
+					onchange="selJobCCode(this);"><br></td>
+			</tr>
+			<tr>
+				<td>Total Amount:</td>
+				<td><input type="text" th:field="*{amount}" size="20"><br></td>
+			</tr>
+			<tr>
+				<td><select id="Machinecode" name="Machinecode"
+					onchange="selMachineCode(this);">
+
+						<option th:each="mc:${mclist}" th:value="${mc.machineCode}"
+							th:text="${mc.description}"></option>
+				</select></td>
+			<tr>
+				<td>Machine Hours Used:</td>
+				<td><input type="text" th:field="*{hoursUsed}"
+					onchange="selMachineCode(this);"></td>
+			</tr>
+			<tr>
+				<td>Machine Charge:</td>
+				<td><input type="text" th:field="*{machinecharge}"></td>
+			</tr>
+			<tr>
+				<td>Status:</td>
+				<td><input type="text" th:field="*{approvalStatus}"></td>
+			</tr>
+		</table>
+		<p>
+			<button type="submit">save</button>
+		</p>
+	</form>
+
+
+</body>
+
+   <script th:inline="javascript">
+				/*<![CDATA[*/
+				function selJobCCode() {
+					var jcodlist = /*[[${jclist}]]*/null;
+					var selectedIndex = document.getElementById('Jobcode').selectedIndex;
+					var jco = jcodlist[selectedIndex];
+					document.getElementById("amount").value = jco.hourlyRate
+							* document.getElementById("laborHoursWorked").value;
+				};
+
+				function selMachineCode() {
+					var mcodlist = /*[[${mclist}]]*/null;
+					var selectedIndex = document.getElementById('Machinecode').selectedIndex;
+					var mco = mcodlist[selectedIndex];
+					document.getElementById("machinecharge").value = mco.hourlyRent
+							* document.getElementById("hoursUsed").value;
+				}
+				/*]]>*/
+			</script>
+</html>
+
+
+</body>
+</html>
