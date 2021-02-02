@@ -1,12 +1,4 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-
-<!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -17,10 +9,10 @@
 
 	<h1>Time Sheet Submission</h1>
 
-	<form action="#" th:action="@{/savetimesheet}" th:object="${timesheet}"
-		method="post">
+
+	<form action="#" th:action="@{/add_timesheet}" th:object="${timesheet}" method="post">
 		<table border="1">
-			<tr>
+		<tr>
 				<td>Site code:</td>
 				<td><input type="text" th:field="*{siteCode}" size="20"></td>
 				<td>Contractor Name:</td>
@@ -28,71 +20,118 @@
 				<td>Date:</td>
 				<td><input type="text" th:field="*{date}" size="20" /></td>
 			<tr>
-				<td><select id="Jobcode" name="Jobcode"
-					onchange="selJobCCode(this);">
-						<option th:each="jc:${jclist}" th:value="${jc.jobCode}"
-							th:text="${jc.description}"></option>
-				</select></td>
-			</tr>
-			<tr>
-				<td>Labor Hours Worked:</td>
-				<td><input type="text" th:field="*{laborHoursWorked} "
-					onchange="selJobCCode(this);"><br></td>
-			</tr>
-			<tr>
-				<td>Total Amount:</td>
-				<td><input type="text" th:field="*{amount}" size="20"><br></td>
-			</tr>
-			<tr>
-				<td><select id="Machinecode" name="Machinecode"
-					onchange="selMachineCode(this);">
+		</table>
+		<br/>
+		<h2>Labor Entry</h2>
 
-						<option th:each="mc:${mclist}" th:value="${mc.machineCode}"
-							th:text="${mc.description}"></option>
-				</select></td>
-			<tr>
-				<td>Machine Hours Used:</td>
-				<td><input type="text" th:field="*{hoursUsed}"
-					onchange="selMachineCode(this);"></td>
-			</tr>
-			<tr>
-				<td>Machine Charge:</td>
-				<td><input type="text" th:field="*{machinecharge}"></td>
-			</tr>
-			<tr>
-				<td>Status:</td>
-				<td><input type="text" th:field="*{approvalStatus}"></td>
-			</tr>
+		<table border="1">
+		
+		 <thead>
+    <tr>
+      <th>Labor Code</th>
+      <th>Hours worked</th>
+      <th>Amount</th>
+      <th>
+              <button type="submit" name="addRow" >Add row</button>
+       <!--  <button type="submit" name="addRow" th:text="#{seedstarter.row.add}">Add row</button> -->
+      </th>
+    </tr>
+  </thead>
+   <tbody>
+    <tr th:each="row,rowStat : *{tslcs}">
+      
+      <td>
+      <!--   <select th:field="*{tslcs[__${rowStat.index}__].jbcode.jobCode}"   th:onchange="'javascript:selJobCCode(\''+ ${rowStat.index} +'\');'"> -->
+      
+           <select th:field="*{tslcs[__${rowStat.index}__].jbcode}"   th:onchange="'javascript:selJobCCode(\''+ ${rowStat.index} +'\');'">
+          <option th:each="jc:${jclist}" 
+                  th:value="${jc.jobCode}"
+				  th:text="${jc.description}"></option>
+        </select>
+      </td>
+      <td>
+        <input type="text" th:field="*{tslcs[__${rowStat.index}__].laborHoursWorked}" th:onchange="'javascript:selJobCCode(\''+ ${rowStat.index} +'\');'" />
+      </td>
+      <td>
+      <input type="text" th:field="*{tslcs[__${rowStat.index}__].amount}" />
+      </td>
+      <!-- <td>
+        <button type="submit" name="removeRow" 
+                th:value="${rowStat.index}" th:text="#{seedstarter.row.remove}">Remove row</button>
+      </td> -->
+    </tr>
+  </tbody>
+		
+	</table>
+	<br/>
+		<h2>Machine Entry</h2>
+
+		<table border="1">
+		
+		 <thead>
+    <tr>
+      <th>Machine Code</th>
+      <th>Hours Used</th>
+      <th>Amount</th>
+      <th>
+              <button type="submit" name="addmachineRow" >Add row</button>
+       <!--  <button type="submit" name="addRow" th:text="#{seedstarter.row.add}">Add row</button> -->
+      </th>
+    </tr>
+  </thead>
+   <tbody>
+    <tr th:each="row,rowStat : *{tsmcs}">
+      
+      <td>
+      <!--   <select th:field="*{tslcs[__${rowStat.index}__].jbcode.jobCode}"   th:onchange="'javascript:selJobCCode(\''+ ${rowStat.index} +'\');'"> -->
+      
+           <select th:field="*{tsmcs[__${rowStat.index}__].machinecode}"   th:onchange="'javascript:selMachineCode(\''+ ${rowStat.index} +'\');'">
+          <option th:each="mc:${mclist}" 
+                  th:value="${mc.machineCode}"
+				  th:text="${mc.description}"></option>
+        </select>
+      </td>
+      <td>
+        <input type="text" th:field="*{tsmcs[__${rowStat.index}__].hoursUsed}" th:onchange="'javascript:selMachineCode(\''+ ${rowStat.index} +'\');'" />
+      </td>
+      <td>
+      <input type="text" th:field="*{tsmcs[__${rowStat.index}__].machinecharge}" />
+      </td>
+      <!-- <td>
+        <button type="submit" name="removeRow" 
+                th:value="${rowStat.index}" th:text="#{seedstarter.row.remove}">Remove row</button>
+      </td> -->
+    </tr>
+  </tbody>
+		
 		</table>
 		<p>
-			<button type="submit">save</button>
+			<button type="submit" name="save">save</button>
 		</p>
 	</form>
-
-
-</body>
+</body> 
 
    <script th:inline="javascript">
 				/*<![CDATA[*/
-				function selJobCCode() {
+				function selJobCCode(row) {
 					var jcodlist = /*[[${jclist}]]*/null;
-					var selectedIndex = document.getElementById('Jobcode').selectedIndex;
+					
+					
+					
+					var selectedIndex = document.getElementById('tslcs'+row+'.jbcode').selectedIndex;
 					var jco = jcodlist[selectedIndex];
-					document.getElementById("amount").value = jco.hourlyRate
-							* document.getElementById("laborHoursWorked").value;
+					document.getElementById('tslcs'+row+'.amount').value = jco.hourlyRate
+							* document.getElementById('tslcs'+row+'.laborHoursWorked').value;
 				};
 
-				function selMachineCode() {
+				function selMachineCode(row) {
 					var mcodlist = /*[[${mclist}]]*/null;
-					var selectedIndex = document.getElementById('Machinecode').selectedIndex;
+					var selectedIndex = document.getElementById('tsmcs'+row+'.machinecode').selectedIndex;
 					var mco = mcodlist[selectedIndex];
-					document.getElementById("machinecharge").value = mco.hourlyRent
-							* document.getElementById("hoursUsed").value;
+					document.getElementById('tsmcs'+row+'.machinecharge').value = mco.hourlyRent
+							* document.getElementById('tsmcs'+row+'.hoursUsed').value;
 				}
 				/*]]>*/
-			</script>
+			</script> 
 </html>
 
-
-</body>
-</html>

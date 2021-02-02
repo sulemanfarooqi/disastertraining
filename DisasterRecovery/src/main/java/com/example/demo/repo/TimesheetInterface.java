@@ -1,5 +1,7 @@
 package com.example.demo.repo;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -8,4 +10,6 @@ import com.example.demo.entities.TimeSheet;
 @Repository
 public interface TimesheetInterface extends JpaRepository<TimeSheet, Integer> {
 
+	List<TimeSheet> findByApprovalStatus(String status);
+	
 }

@@ -25,7 +25,7 @@ public class TimeSheet {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private int siteCode;
+	private String siteCode;
 	private String contractorName;
 	private String date;
 	private int totalHoursWorked;
@@ -46,7 +46,7 @@ public class TimeSheet {
 
 	
 
-	public TimeSheet(int id, int siteCode, String contractorName, String date, int totalHoursWorked, double totalAmount,
+	public TimeSheet(int id, String siteCode, String contractorName, String date, int totalHoursWorked, double totalAmount,
 			double machineCharge, String approvalStatus, List<TsLaborCharge> tslcs, List<TsMachineCharge> tsmcs) {
 		super();
 		this.id = id;
@@ -69,10 +69,10 @@ public class TimeSheet {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getSiteCode() {
+	public String getSiteCode() {
 		return siteCode;
 	}
-	public void setSiteCode(int siteCode) {
+	public void setSiteCode(String siteCode) {
 		this.siteCode = siteCode;
 	}
 	public String getContractorName() {

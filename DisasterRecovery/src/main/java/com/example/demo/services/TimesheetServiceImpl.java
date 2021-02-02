@@ -12,6 +12,7 @@ import javax.transaction.Transactional;
 import com.example.demo.entities.JobCodeMngmnt;
 import com.example.demo.entities.MachineCodeMangmnt;
 import com.example.demo.entities.TimeSheet;
+
 import com.example.demo.repo.JobInterface;
 import com.example.demo.repo.MachineInterface;
 import com.example.demo.repo.TimesheetInterface;
@@ -31,7 +32,7 @@ public class TimesheetServiceImpl implements TimesheetService{
 	
 	@Transactional
 	@Override
-	public void addTimeSheet(int sitecode, String contractorName, String date,  int laborHoursWorked
+	public void addTimeSheet(String sitecode, String contractorName, String date,  int laborHoursWorked
 			,int hoursUsed,String approvalStatus) {
 		// TODO Auto-generated method stub
 		JobCodeMngmnt jbc = jobrepo.findByJobCode("plumber"); 
@@ -70,5 +71,18 @@ public class TimesheetServiceImpl implements TimesheetService{
 		timesheetrepo.save(ts);
 		
 	}
+	
+	@Transactional
+	@Override
+	public void updateTs(TimeSheet ts,int id) {
+		TimeSheet ts1 = timesheetrepo.findById(id).get();
+		ts1.setApprovalStatus(ts.getApprovalStatus());
+		timesheetrepo.save(ts1);
+		
+		
+		
+	}
+	
+	
 
 }

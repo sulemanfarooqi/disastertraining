@@ -35,7 +35,7 @@ public class MockTesting {
 //		ts.setApprovalStatus("open");
 //		tsrepo.save(ts);
 		
-		tsServ.addTimeSheet(111, "Josh", "01/25/2021", 2, 2, "open");
+		tsServ.addTimeSheet("Pa-120", "Josh", "01/25/2021", 2, 2, "open");
       
 	}
 	

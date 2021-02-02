@@ -4,8 +4,10 @@ import com.example.demo.entities.TimeSheet;
 
 public interface TimesheetService {
 
-	public void addTimeSheet(int sitecode, String contractorName, String date,  int laborHoursWorked
+	public void addTimeSheet(String sitecode, String contractorName, String date,  int laborHoursWorked
 		,int hoursUsed,String approvalStatus);
 	
 	public void save(TimeSheet ts);
+	
+	public void updateTs(TimeSheet ts, int id);
 }
