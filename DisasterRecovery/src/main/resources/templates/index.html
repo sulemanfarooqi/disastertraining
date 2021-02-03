@@ -4,9 +4,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 </head>
 <body>
+
 <h1> Disaster Recovery Dashboard</h1>
+<span th:text="${#authentication.getPrincipal().getUsername()}"></span>
+<span th:text="${#authentication.getPrincipal().authorities}"></span>
 <a href="/add_timesheet"> Add Timesheet</a> <br/>
 <a href="/list_timesheet"> TimeCard </a> <br/>
 <a href = "/listtimesheetadmin"> TimeCard Approval(ADMIN ONLY)</a><br/>

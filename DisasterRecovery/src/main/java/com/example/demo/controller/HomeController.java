@@ -129,7 +129,8 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value="/add_timesheet", method=RequestMethod.POST, params={"addRow"})
-	public String addNewRows(@ModelAttribute("timesheet") TimeSheet ts, @ModelAttribute Dropdown dropdown) {
+	public String addNewRows(@ModelAttribute("timesheet") TimeSheet ts,
+			@ModelAttribute Dropdown dropdown) {
 		
 		System.out.println("in addRow");	
 		ts.getTslcs().add(new TsLaborCharge());
