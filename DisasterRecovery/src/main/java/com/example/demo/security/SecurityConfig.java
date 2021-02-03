@@ -18,7 +18,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		
 		auth.inMemoryAuthentication().
 		withUser("admin")
-		.password("root")
+		.password("admin")
 		.roles("ADMIN")
 		.and()
 		.withUser("user")
@@ -38,10 +38,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-			.antMatchers("/add_timesheet").hasRole("ADMIN")
-			.antMatchers("/list_timesheet").hasAnyRole("ADMIN","USER")
+			.antMatchers("/jobmanagement").hasRole("ADMIN")
+			.antMatchers("/job/add").hasRole("ADMIN")
+			.antMatchers("/job/edit/{id}").hasRole("ADMIN")
+			.antMatchers("/job/save/{id}").hasRole("ADMIN")
+			.antMatchers("/job/delete/{id}").hasRole("ADMIN")
+			.antMatchers("/listtimesheetadmin").hasRole("ADMIN")
+			.antMatchers("/add_timesheet").hasRole("USER")
+			.antMatchers("/list_timesheet").hasRole("USER")
 			.antMatchers("/").hasAnyRole("ADMIN","USER")
 			.and().formLogin();
+		
+		
+
 	}
 
 }
